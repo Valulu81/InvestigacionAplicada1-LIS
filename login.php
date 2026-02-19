@@ -7,7 +7,7 @@
     <title>Login - Nexus Corp</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 
 <body class="login-body d-flex align-items-center justify-content-center">
@@ -32,7 +32,7 @@
                 <label for="password" class="form-label">Contraseña</label>
                 <div class="input-group">
                     <input type="password" class="form-control" id="password" placeholder="••••••••">
-                    
+
                 </div>
             </div>
 
