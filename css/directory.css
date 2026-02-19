@@ -1,0 +1,189 @@
+/* header */
+
+.navbar {
+    background-color: #0F172A;
+    color: #fff !important;
+    padding: 20px;
+    text-align: center;
+}
+
+nav h1 {
+    color: #fff !important;
+    font-size: 30px !important;
+    font-style: italic !important;
+    margin: 0;
+}
+
+body {
+    background-color: #0F172A;
+    color: #fff;
+}
+
+/* Avatar */
+.avatar-img {
+    max-width: 110px;
+    height: auto;
+    margin-left: 5%;
+}
+
+@media (min-width: 576px) {
+    .avatar-img {
+        max-width: 100px;
+    }
+}
+
+/* carta de empleados */
+.empleados .empleado {
+    background-color: #0F172A;
+    color: #fff;
+    max-width: 400px !important;
+    border-radius: 15px !important;
+    border-color: #293545;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transition: transform 0.2s;
+}
+
+.btn-outline-opciones {
+    color: #A26EE8;
+    border-color: #A26EE8;
+}
+
+.btn-outline-opciones:hover {
+    background-color: #A26EE8;
+    color: #fff;
+    border-color: #A26EE8;
+}
+
+.trabajo {
+    color: #00ff51 !important;
+}
+
+
+
+.directorio {
+    background-color: #181220;
+}
+
+/* barra busqueda */
+.form-control {
+    background-color: #1E293B;
+    color: #fff;
+    border-radius: 15px;
+    border-color: #4b596d;
+    min-width: 300px;
+    height: 45px;
+    max-width: 60% !important;
+}
+
+.form-control::placeholder {
+    color: #4b596d;
+}
+
+.form-control:focus {
+    background-color: #1E293B;
+    color: #fff;
+    border-color: #4b596d;
+    box-shadow: 0 0 0 0.2rem rgba(75, 89, 109, 0.25);
+}
+
+/* botones de filtro */
+.filtrobtn {
+    background-color: #1E293B;
+    color: #fff;
+    border-radius: 15px;
+    border-color: #4b596d;
+}
+
+.filtrobtn:hover {
+    background-color: #4b596d;
+    color: #fff;
+    border-color: #4b596d;
+}
+
+.filtrobtn:active,
+.filtrobtn:focus {
+    background-color: #4b596d;
+    color: #fff;
+    border-color: #4b596d;
+    box-shadow: 0 0 0 0.2rem rgba(75, 89, 109, 0.25);
+}
+
+.btn-check:checked+.filtrobtn {
+    background-color: #A26EE8;
+    color: #fff;
+    border-color: #A26EE8;
+}
+
+/* botones sidebar */
+.menubtn:active,
+.menubtn:focus {
+    background-color: #4b596d;
+    color: #fff;
+    border-color: #4b596d;
+    box-shadow: 0 0 0 0.2rem rgba(75, 89, 109, 0.25);
+}
+
+.menubtn:hover {
+    background-color: #1E203D;
+    color: #fff;
+    border-color: #1E203D;
+}
+
+.btn-check:checked+.filtrobtn {
+    background-color: #1E293B;
+    color: #A855F7 !important;
+    border-color: #A855F7;
+}
+
+.btn-check:checked+.menubtn {
+    background-color: #1E293B;
+    border-color: #1E293B;
+}
+
+.menubtn a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.menubtn a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-check:checked+.menubtn a {
+    color: #A855F7 !important;
+}
+
+/* colores sidebar y footer */
+.sidebar {
+    background-color: #0F172A;
+}
+
+.pie {
+    background-color: #1E203D;
+}
+
+.perfil {
+    background-color: #0F172A;
+    border-radius: 15px;
+    height: 95%;
+    border-color: #293545;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-img {
+    max-width: 120px;
+    height: auto;
+}
+
+/* Botón morado */
+.btn-outline-morado {
+    color: #A855F7;
+    border-color: #A855F7;
+}
+
+.btn-outline-morado:hover {
+    background-color: #A855F7;
+    color: #fff;
+    border-color: #A855F7;
+}
