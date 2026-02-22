@@ -1,3 +1,92 @@
+<?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? null;
+
+    if (!$email || !$password) {
+        die("Por favor ingresa email y contraseña.");
+    }
+
+    // Login
+    $url = "http://127.0.0.1:8000/api/login";
+    $data = ["email" => $email, "password" => $password];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    $result = json_decode($response, true);
+
+    if (isset($result['token'])) {
+        $_SESSION['token'] = $result['token'];
+
+        // Obtener datos del usuario autenticado
+        $userUrl = "http://127.0.0.1:8000/api/usuarios?email=" . urlencode($email);
+        $ch = curl_init($userUrl);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer " . $_SESSION['token']
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $userResponse = curl_exec($ch);
+        curl_close($ch);
+
+        $userData = json_decode($userResponse, true);
+
+        // Si la API devuelve un array, buscar el usuario por email
+        $selectedUser = null;
+        if (is_array($userData)) {
+            foreach ($userData as $u) {
+                if (isset($u['email']) && strtolower($u['email']) === strtolower($email)) {
+                    $selectedUser = $u;
+                    break;
+                }
+            }
+        } else {
+            $selectedUser = $userData;
+        }
+
+        // Si no se encontró, fallback
+        if (!$selectedUser) {
+            die("No se encontró el usuario con ese correo.");
+        }
+
+        // Detectar campo de rol (ajusta según tu API)
+        $role = $selectedUser['role']
+            ?? $selectedUser['rol']
+            ?? $selectedUser['tipo']
+            ?? "user";
+
+        $role = strtolower($role);
+
+        // Guardar en sesión
+        $_SESSION['user'] = [
+            "name" => $selectedUser['name'] ?? null,
+            "email" => $selectedUser['email'] ?? null,
+            "role" => $role
+        ];
+
+        // Redirigir según rol
+        if ($_SESSION['user']['role'] === 'admin') {
+            header("Location: admin/admin_menu.php");
+        } else {
+            header("Location: user/user_menu.php");
+        }
+        exit;
+    } else {
+        echo "Error al iniciar sesión: " . json_encode($result);
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,16 +111,16 @@
         <h4 class="text-center mb-3">Bienvenido de nuevo</h4>
         <p class="text-center text-secondary">Ingresa tus credenciales para continuar</p>
 
-        <form>
+        <form action="login.php" method="POST">
             <div class="mb-3">
                 <label for="email" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="email" placeholder="name@company.com">
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@company.com" required>
             </div>
 
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" id="password" placeholder="••••••••">
+                    <input type="password" class="form-control" id="password" placeholder="••••••••" name="password" required>
 
                 </div>
             </div>
@@ -48,6 +137,8 @@
         </form>
 
         <div class="mt-4 text-center">
+            <a href="signin.php" class="text-morado text-decoration-none">¿No tienes cuenta? Iniciala aqui!</a>
+            <hr>
             <a href="#" class="text-secondary text-decoration-none">Contactar soporte IT</a>
             <div class="mt-2">
                 <a href="#" class="text-secondary text-decoration-none me-3">Política de privacidad</a>

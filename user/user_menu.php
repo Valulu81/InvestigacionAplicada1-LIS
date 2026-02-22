@@ -39,14 +39,6 @@
                         </a>
                     </label>
 
-                    <input type="radio" class="btn-check" name="menu" id="menu2" autocomplete="off"
-                        <?php echo $page == 'perfil' ? 'checked' : ''; ?>>
-                    <label class="btn menubtn w-100" for="menu2">
-                        <a href="?page=perfil" class="text-decoration-none text-white d-block">
-                            <i class="bi bi-person-fill me-2"></i> Mi Perfil
-                        </a>
-                    </label>
-
                 </li>
             </ul>
 
@@ -54,9 +46,6 @@
         <!-- contenedor dinamico para la sidebar -->
         <?php // Detectar qué página cargar 
         switch ($page) {
-            case 'perfil':
-                include 'perfil.php';
-                break;
             default:
                 include 'directorio.php';
         } ?>
@@ -72,15 +61,6 @@
                 <label class="btn menubtn" for="menu3">
                     <a href="?page=directorio" class="text-decoration-none d-block">
                         <i class="bi bi-people me-2"></i> Directorio
-                    </a>
-                </label>
-            </li>
-            <li class="nav-item">
-                <input type="radio" class="btn-check" name="menu_footer" id="menu4" autocomplete="off"
-                    <?php echo $page == 'perfil' ? 'checked' : ''; ?>>
-                <label class="btn menubtn" for="menu4">
-                    <a href="?page=perfil" class="text-decoration-none d-block">
-                        <i class="bi bi-person-fill me-2"></i> Mi Perfil
                     </a>
                 </label>
             </li>

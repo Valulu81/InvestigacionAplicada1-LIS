@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,9 +8,10 @@
     <title>Directorio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/directory.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
 
 </head>
 
@@ -46,7 +48,7 @@
                         <a href="?page=dashboard" class="text-decoration-none text-white d-block">
                             <i class="bi bi-speedometer2 me-2"></i> DashBoard
                         </a>
-                    </label>
+                    </label>  
 
                 </li>
             </ul>
@@ -91,8 +93,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
+    <!-- conexion con js -->
+    <script src="../js/directory.js"></script>
 </body>
-<!-- conexion con js -->
-<script src="/js/directory.js"></script>
 
 </html>

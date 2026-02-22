@@ -96,12 +96,10 @@ button.delete:hover {
 @media (max-width: 768px) {
     .filters button {
         flex: 1 1 100%;
-        /* cada botón ocupa toda la fila */
     }
 
     .employee-table th,
     .employee-table td {
         font-size: 0.9em;
-        /* texto más compacto */
     }
 }

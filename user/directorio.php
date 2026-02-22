@@ -25,23 +25,16 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-2">
                             <h5 class="card-title mb-0">John Doe</h5>
-                            <button type="button" class="trabajo btn  btn-outline ms-auto rounded-pill" disabled>
-                                INGENIERIA
-                            </button>
                         </div>
 
                         <p class="card-text my-1">Senior Product Designer</p>
-                        <p class="card-text d-md-none my-0"><i class="bi bi-envelope-fill me-2"></i> j.doe@gmail.com</p>
+                        <p class="card-text  my-0"><i class="bi bi-envelope-fill me-2"></i> j.doe@gmail.com</p>
                     </div>
                 </div>
             </div>
 
             <!-- esta es parte namas de compu -->
             <div class="d-none d-md-block mb-3 px-3">
-                <div class="mx-4">
-                    <p class="card-text my-0"><i class="bi bi-building-fill me-3"></i> Design Department</p>
-                    <p class="card-text my-0"><i class="bi bi-envelope-fill me-3"></i> j.doe@gmail.com</p>
-                </div>
                 <hr>
                 <div class="d-flex justify-content-center gap-3">
                     <button class="btn btn-outline-opciones px-4 rounded" type="button">

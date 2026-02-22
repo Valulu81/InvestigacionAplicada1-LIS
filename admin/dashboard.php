@@ -1,65 +1,80 @@
+<?php
+session_start();
+
+// Verificar token
+if (!isset($_SESSION['token'])) {
+    header("Location: ../login.php");
+    exit;
+}
+
+// Consumir API de usuarios
+$url = "http://127.0.0.1:8000/api/usuarios";
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer " . $_SESSION['token'],
+    "Content-Type: application/json"
+]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$usuarios = json_decode($response, true);
+?>
+
 <section class="directorio col-12 col-md-10 p-3">
-    <form class="d-flex my-3" role="search" onsubmit="return buscar();"> <input id="filtrar" class="form-control me-2 " type="search" placeholder="Busca nombre, rol o departamento" aria-label="Search"> </form>
-    <!-- aqui va el filtro de roles de empleados :D -->
-    <div class="filtros mb-3 d-flex flex-wrap gap-2">
-        <input type="radio" class="btn-check" name="role" id="role1" autocomplete="off" checked>
-        <label class="btn filtrobtn" for="role1">Todos los empleados</label>
-
-        <input type="radio" class="btn-check" name="role" id="role2" autocomplete="off">
-        <label class="btn  filtrobtn" for="role2">Ingeniería</label>
-
-        <input type="radio" class="btn-check" name="role" id="role3" autocomplete="off">
-        <label class="btn  filtrobtn" for="role3">Marketing</label>
-    </div>
+    <form class="d-flex my-3" role="search" onsubmit="return buscar();">
+        <input id="filtrar" class="form-control me-2" type="search"
+            placeholder="Busca nombre, rol o departamento" aria-label="Search">
+    </form>
 
     <div class="employee-table p-0 container-fluid m-0">
         <div class="table-responsive p-0">
-        <table>
-            <thead>
-                <tr>
-                    <th>EMPLOYEE</th>
-                    <th>ROLE</th>
-                    <th>AGE</th>
-                    <!-- lo ocultamos para pantallas mas pequeñas -->
-                    <th >JOIN DATE</th>
-                    <th>ACTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="employee-info">
-                            <strong>Alex Rivera</strong><br>
-                            <span class="email">alex.r@company.com</span>
-                        </div>
-                    </td>
-                    <td><span class="tag backend">Ingeniero</span></td>
-                    <td>32</td>
-                    <td >Jun 12, 2021</td>
-                    <td>
-                        <button class="edit"><i class="bi bi-pencil-fill"></i></button>
-                        <button class="delete"><i class="bi bi-trash-fill"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="employee-info">
-                            <strong>Sarah Chen</strong><br>
-                            <span class="email">sarah.c@company.com</span>
-                        </div>
-                    </td>
-                    <td><span class="tag design">Arquitecto</span></td>
-                    <td>28</td>
-                    <td >Mar 05, 2022</td>
-                    <td>
-                        <button class="edit"><i class="bi bi-pencil-fill"></i></button>
-                        <button class="delete"><i class="bi bi-trash-fill"></i></button>
-                    </td>
-                </tr>
-                <!-- Más filas aquí -->
-            </tbody>
-        </table>
+            <table class="table table-striped table-dark align-middle">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (isset($usuarios['Message'])): ?>
+                        <tr>
+                            <td colspan="4"><?php echo $usuarios['Message']; ?></td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($usuarios as $u): ?>
+                            <tr data-id="<?php echo $u['id']; ?>">
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                                            alt="Avatar"
+                                            class="rounded-circle avatar-img"
+                                            style="width:40px; height:40px;">
+                                        <strong><?php echo htmlspecialchars($u['name']); ?></strong>
+                                    </div>
+                                </td>
+                                <td><?php echo htmlspecialchars($u['email']); ?></td>
+                                <td><?php echo htmlspecialchars($u['role']); ?></td>
+                                <td>
+                                    <button class="btn btn-sm "
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editModal<?php echo $u['id']; ?>">
+                                        <i class="bi bi-pencil-fill text-success"></i>
+                                    </button>
+                                    <button class="btn btn-sm eliminar-btn"
+                                        data-id="<?php echo $u['id']; ?>">
+                                        <i class="bi bi-trash-fill text-danger"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php include 'edit.php'; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
-
 </section>
