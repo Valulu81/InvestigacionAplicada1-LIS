@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// Verificar token
+// mismo que en dashboard, valida token y si no pa login
 if (!isset($_SESSION['token'])) {
     header("Location: ../login.php");
     exit;
 }
 
-// Consumir API de usuarios
+// obtiene api
 $url = "http://127.0.0.1:8000/api/usuarios";
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -28,19 +28,7 @@ $usuarios = json_decode($response, true);
             placeholder="Busca nombre, rol o departamento" aria-label="Search">
     </form>
 
-        <!-- aqui va el filtro de roles de empleados :D -->
-    <div class="filtros mb-3 d-flex flex-wrap gap-2">
-        <input type="radio" class="btn-check" name="role" id="role1" autocomplete="off" checked>
-        <label class="btn filtrobtn" for="role1">Todos los empleados</label>
-
-        <input type="radio" class="btn-check" name="role" id="role2" autocomplete="off">
-        <label class="btn  filtrobtn" for="role2">Ingeniería</label>
-
-        <input type="radio" class="btn-check" name="role" id="role3" autocomplete="off">
-        <label class="btn  filtrobtn" for="role3">Marketing</label>
-    </div>
-
-    <div class="empleados d-flex flex-wrap gap-3 ms-2">
+    <div class="empleados d-flex flex-wrap gap-3 ">
         <?php if (isset($usuarios['Message'])): ?>
             <p><?php echo $usuarios['Message']; ?></p>
         <?php else: ?>
@@ -67,6 +55,7 @@ $usuarios = json_decode($response, true);
                         <div class="d-none d-md-block px-3">
                             <hr>
                             <div class="d-flex justify-content-center gap-3 mb-3">
+                                <!-- mismo boton para editar y el otro para eliminar-->
                                 <button class="btn btn-outline-success px-4 rounded"
                                     type="button"
                                     data-bs-toggle="modal"

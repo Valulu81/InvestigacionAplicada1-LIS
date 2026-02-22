@@ -16,7 +16,6 @@
 </head>
 
 <body>
-    <!-- Directorio donde se mostraran los empleados para el lado del usuario, no se editan datos del empleado -->
     <header>
         <nav class="navbar fixed-top">
             <div class="container-fluid">
@@ -54,8 +53,7 @@
             </ul>
 
         </section>
-        <!-- contenedor dinamico para la sidebar -->
-        <?php // Detectar qué página cargar 
+        <?php // aqui cambia de pag pa sidebar y footer
         switch ($page) {
                 case 'dashboard':
                 include 'dashboard.php';
@@ -66,7 +64,7 @@
 
     </main>
 
-    <!-- parte que no se mueve ed la parte inferior de la pag unico para telefonos -->
+    <!-- parte que no se mueve en la parte inferior de la pag unico para telefonos -->
     <footer class="pie d-block d-md-none  text-center p-2 fixed-bottom py-3">
         <ul class="nav d-flex justify-content-center gap-3">
             <li class="nav-item">
@@ -93,8 +91,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
-    <!-- conexion con js -->
-    <script src="../js/directory.js"></script>
 </body>
 
 </html>
