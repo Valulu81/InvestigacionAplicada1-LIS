@@ -1,7 +1,7 @@
 console.log("Cargando directory.js");
 
 document.addEventListener("DOMContentLoaded", () => {
-    // === BUSCAR EN DIRECTORIO ===
+    // filtrar usuarios
     const inputFiltro = document.getElementById("filtrar");
 
     function buscar() {
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // === ELIMINAR USUARIO EN DIRECTORIO ===
+    // eliminar usuarios
     document.querySelectorAll(".eliminar-btn").forEach(btn => {
         btn.addEventListener("click", async () => {
             const userId = btn.getAttribute("data-id");
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // === EDITAR USUARIO EN DIRECTORIO ===
+    // editarlos
     document.querySelectorAll(".edit-user-form").forEach(form => {
         form.addEventListener("submit", async e => {
             e.preventDefault();
