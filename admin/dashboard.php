@@ -24,8 +24,8 @@ $usuarios = json_decode($response, true);
 
 <section class="directorio col-12 col-md-10 p-3">
     <form class="d-flex my-3" role="search" onsubmit="return filtrarDash();">
-        <input id="filtrarD" class="form-control me-2" type="search"
-            placeholder="Busca nombre, rol o departamento" aria-label="Search">
+        <input id="filtrarD" class="form-control me-2" type="search" placeholder="Busca nombre, rol o departamento"
+            aria-label="Search">
     </form>
 
     <div class="employee-table p-0 container-fluid m-0">
@@ -41,46 +41,49 @@ $usuarios = json_decode($response, true);
                 </thead>
                 <tbody>
                     <?php if (isset($usuarios['Message'])): ?>
-                        <tr>
-                            <td colspan="4"><?php echo $usuarios['Message']; ?></td>
-                        </tr>
+                    <tr>
+                        <td colspan="4"><?php echo $usuarios['Message']; ?></td>
+                    </tr>
                     <?php else: ?>
-                        <?php foreach ($usuarios as $u): ?>
-                            <tr data-id="<?php echo $u['id']; ?>">
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <strong><?php echo htmlspecialchars($u['name']); ?></strong>
-                                    </div>
-                                </td>
-                                <td><?php echo htmlspecialchars($u['email']); ?></td>
-                                <td><?php echo htmlspecialchars($u['role']); ?></td>
-                                <td>
-                                    <!-- aqui abre el modal de editar -->
-                                    <button class="btn btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#editModal<?php echo $u['id']; ?>">
-                                        <i class="bi bi-pencil-fill text-success"></i>
-                                    </button>
-                                    <!-- este elimina -->
-                                    <button class="btn btn-sm eliminar-btn"
-                                        data-id="<?php echo $u['id']; ?>">
-                                        <i class="bi bi-trash-fill text-danger"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- manda a llamar el modal-->
-                            <?php include 'edit.php'; ?>
-                        <?php endforeach; ?>
+                    <?php foreach ($usuarios as $u): ?>
+                    <tr data-id="<?php echo $u['id']; ?>">
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <strong><?php echo htmlspecialchars($u['name']); ?></strong>
+                            </div>
+                        </td>
+                        <td><?php echo htmlspecialchars($u['email']); ?></td>
+                        <td><?php echo htmlspecialchars($u['role']); ?></td>
+                        <td>
+                            <!-- aqui abre el modal de editar -->
+                            <button class="btn btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#editModal<?php echo $u['id']; ?>">
+                                <i class="bi bi-pencil-fill text-success"></i>
+                            </button>
+                            <!-- este elimina -->
+                            <button class="btn btn-sm eliminar-btn" data-id="<?php echo $u['id']; ?>">
+                                <i class="bi bi-trash-fill text-danger"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <?php endforeach; ?>
                     <?php endif; ?>
                 </tbody>
 
             </table>
         </div>
     </div>
+    <!-- manda a llamar el modal-->
+    <?php if (!isset($usuarios['Message'])): ?>
+    <?php foreach ($usuarios as $u): ?>
+    <?php include 'edit.php'; ?>
+    <?php endforeach; ?>
+    <?php endif; ?>
 
-        <!-- pasa el token pa peticiones en js -->
+    <!-- pasa el token pa peticiones en js -->
     <script>
-        window.sessionToken = "<?php echo $_SESSION['token']; ?>";
+    window.sessionToken = "<?php echo $_SESSION['token']; ?>";
     </script>
     <script src="../js/dashboard.js"></script>
 </section>
